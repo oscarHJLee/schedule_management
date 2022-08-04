@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  BOOTSTRAO LINK  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--  GOOGLE FONTS LINK  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <!--  DEFAULT CSS LINK  -->
+    <link rel="stylesheet" href="/static/base.css">
+    <title>STUDYING</title>
+</head>
+
+
+<body style="font-family: 'NanumSqareR';">
+
+<div class = "pinterest_header">
+    <div><h1 class = "pinterest_logo">STUDYING</h1>
+    </div>
+    <div class="pinterest_header_navbar">
+        <a href="{% url 'articles:list' %}?next={{ request.path }}" class="pinterest_header_nav">
+            <span>Articles</span>
+        </a>
+        <a href="{% url 'projects:list' %}?next={{ request.path }}" class="pinterest_header_nav">
+            <span>Project</span>
+        </a>
+
+        {% if not user.is_authenticated %}
+        <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="pinterest_header_nav">
+            <span>login</span>
+        </a>
+        <a href="{% url 'accounts:create' %}?next={{ request.path }}" class="pinterest_header_nav">
+            <span>SignUp</span>
+        </a>
+        {% else %}
+        <a href="{% url 'accounts:detail' pk=user.pk %}" class="pinterest_header_nav">
+            <span>MyPage</span>
+        </a>
+        <a href="{% url 'accounts:logout' %}?next={{ request.path }}" class="pinterest_header_nav">
+            <span>logout</span>
+        </a>
+        {% endif %}
+
+    </div>
+</div>
+
+<hr>
+
+
+<div>
+{% block content %}
+    {% endblock %}
+</div>
+
+
+<hr>
+
+<div class = "pinterest_footer">
+    <div class = "pinterest_footer_button">
+        <span>공지사항</span> |
+        <span>제휴문의</span> |
+        <span>서비스 소개</span>
+    </div>
+    <div class = "pinterest_footer_logo">
+        <h6 class = "pinterest_logo">STUDYING</h6>
+    </div>
+</div>
+
+</body>
+</html>
